@@ -2,69 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jump Scare</title>
+  <title>Scary Surprise</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: black;
-      height: 100%;
       width: 100%;
+      height: 100%;
       overflow: hidden;
+      cursor: pointer;
     }
     #scaryImage {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
-      z-index: 1;
-    }
-    #blackOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: 2;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <div id="blackOverlay"></div>
-  <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
-  <audio id="scarySound" src="scarysound.mp3" loop></audio>
-
+  <img id="scaryImage" src="./scaryimage.jpg" alt="Scary Image">
+  <audio id="scarySound" src="./scarysound.mp3"></audio>
   <script>
-    const sound = document.getElementById('scarySound');
-    const image = document.getElementById('scaryImage');
-    const overlay = document.getElementById('blackOverlay');
+    document.body.addEventListener('click', function () {
+      const img = document.getElementById('scaryImage');
+      const audio = document.getElementById('scarySound');
 
-    function scare() {
+      // Display the image
+      img.style.display = 'block';
+
+      // Play the sound at full volume
+      audio.volume = 1.0;
+      audio.play();
+
       // Request fullscreen
-      const docEl = document.documentElement;
-      if (docEl.requestFullscreen) {
-        docEl.requestFullscreen();
-      } else if (docEl.webkitRequestFullscreen) {
-        docEl.webkitRequestFullscreen();
-      } else if (docEl.msRequestFullscreen) {
-        docEl.msRequestFullscreen();
+      const requestFullScreen = document.documentElement.requestFullscreen ||
+                                document.documentElement.webkitRequestFullscreen ||
+                                document.documentElement.mozRequestFullScreen ||
+                                document.documentElement.msRequestFullscreen;
+      if (requestFullScreen) {
+        requestFullScreen.call(document.documentElement);
       }
-
-      // Show image and remove overlay
-      image.style.display = 'block';
-      overlay.remove();
-
-      // Set volume and play sound
-      sound.volume = 1.0;
-      sound.play();
-    }
-
-    // Add click event listener
-    window.addEventListener('click', scare, { once: true });
+    }, { once: true });
   </script>
 </body>
 </html>
