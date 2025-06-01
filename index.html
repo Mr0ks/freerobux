@@ -9,23 +9,38 @@
       padding: 0;
       overflow: hidden;
       background: black;
+      height: 100vh;
+      width: 100vw;
     }
     #scaryImage {
+      display: none; /* Hidden by default */
       width: 100vw;
       height: 100vh;
       object-fit: cover;
     }
+    #blackOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
+  <div id="blackOverlay"></div>
   <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
   <audio id="scarySound" src="scarysound.mp3" loop></audio>
 
   <script>
     const sound = document.getElementById('scarySound');
+    const image = document.getElementById('scaryImage');
+    const overlay = document.getElementById('blackOverlay');
 
-    function goFullScreenAndScare() {
-      // Fullscreen mode
+    function startScare() {
+      // Go fullscreen
       const docEl = document.documentElement;
       if (docEl.requestFullscreen) {
         docEl.requestFullscreen();
@@ -35,13 +50,17 @@
         docEl.msRequestFullscreen();
       }
 
-      // Play sound at full volume
+      // Remove black overlay and show image
+      overlay.remove();
+      image.style.display = 'block';
+
+      // Set max volume and play
       sound.volume = 1.0;
       sound.play();
     }
 
-    // Start on user click
-    window.addEventListener('click', goFullScreenAndScare, { once: true });
+    // Wait for first click to trigger
+    window.addEventListener('click', startScare, { once: true });
   </script>
 </body>
 </html>
