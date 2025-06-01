@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scary Surprise</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    #scaryImage {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
+  <audio id="scarySound" src="scarysound.mp3"></audio>
+
+  <script>
+    const image = document.getElementById('scaryImage');
+    const sound = document.getElementById('scarySound');
+
+    function goFullScreenAndScare() {
+      // Fullscreen
+      const docEl = document.documentElement;
+      if (docEl.requestFullscreen) {
+        docEl.requestFullscreen();
+      } else if (docEl.webkitRequestFullscreen) {
+        docEl.webkitRequestFullscreen();
+      } else if (docEl.msRequestFullscreen) {
+        docEl.msRequestFullscreen();
+      }
+
+      // Play sound
+      sound.play();
+    }
+
+    // Require a user click to start
+    window.addEventListener('click', goFullScreenAndScare, { once: true });
+  </script>
+</body>
+</html>
