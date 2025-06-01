@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Scary Surprise</title>
+  <title>Jump Scare</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
       background: black;
       height: 100vh;
       width: 100vw;
+      overflow: hidden;
     }
-    #scaryImage {
-      display: none; /* Hidden by default */
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
+
     #blackOverlay {
       position: fixed;
       top: 0;
@@ -26,6 +21,17 @@
       height: 100vh;
       background: black;
       z-index: 10;
+    }
+
+    #scaryImage {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: fill; /* Stretches image to entire screen */
+      z-index: 5;
     }
   </style>
 </head>
@@ -39,8 +45,8 @@
     const image = document.getElementById('scaryImage');
     const overlay = document.getElementById('blackOverlay');
 
-    function startScare() {
-      // Go fullscreen
+    function scare() {
+      // Fullscreen
       const docEl = document.documentElement;
       if (docEl.requestFullscreen) {
         docEl.requestFullscreen();
@@ -50,17 +56,19 @@
         docEl.msRequestFullscreen();
       }
 
-      // Remove black overlay and show image
+      // Show image, remove overlay
       overlay.remove();
       image.style.display = 'block';
 
-      // Set max volume and play
+      // Max volume inside browser
       sound.volume = 1.0;
+
+      // Play sound
       sound.play();
     }
 
-    // Wait for first click to trigger
-    window.addEventListener('click', startScare, { once: true });
+    // Wait for click
+    window.addEventListener('click', scare, { once: true });
   </script>
 </body>
 </html>
