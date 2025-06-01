@@ -8,30 +8,28 @@
       margin: 0;
       padding: 0;
       background: black;
-      height: 100vh;
-      width: 100vw;
+      height: 100%;
+      width: 100%;
       overflow: hidden;
     }
-
-    #blackOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 10;
-    }
-
     #scaryImage {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: fill; /* Stretches image to entire screen */
-      z-index: 5;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    #blackOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 2;
     }
   </style>
 </head>
@@ -46,7 +44,7 @@
     const overlay = document.getElementById('blackOverlay');
 
     function scare() {
-      // Fullscreen
+      // Request fullscreen
       const docEl = document.documentElement;
       if (docEl.requestFullscreen) {
         docEl.requestFullscreen();
@@ -56,18 +54,16 @@
         docEl.msRequestFullscreen();
       }
 
-      // Show image, remove overlay
-      overlay.remove();
+      // Show image and remove overlay
       image.style.display = 'block';
+      overlay.remove();
 
-      // Max volume inside browser
+      // Set volume and play sound
       sound.volume = 1.0;
-
-      // Play sound
       sound.play();
     }
 
-    // Wait for click
+    // Add click event listener
     window.addEventListener('click', scare, { once: true });
   </script>
 </body>
