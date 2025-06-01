@@ -29,7 +29,7 @@
 <body>
   <img id="blackScreen" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png" alt="Black Screen">
   <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
-  <audio id="scarySound" src="scarysound.mp3"></audio>
+  <audio id="scarySound" src="scarysound.mp3" loop></audio>
 
   <script>
     document.body.addEventListener('click', function () {
@@ -41,11 +41,11 @@
       black.style.display = 'none';
       img.style.display = 'block';
 
-      // Play sound at full volume
+      // Set volume to maximum and play sound
       sound.volume = 1.0;
       sound.play();
 
-      // Fullscreen
+      // Enter fullscreen mode
       const requestFullscreen = document.documentElement.requestFullscreen ||
                                 document.documentElement.webkitRequestFullscreen ||
                                 document.documentElement.mozRequestFullScreen ||
