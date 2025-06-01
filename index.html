@@ -2,51 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Scary Surprise</title>
+  <title>Scary Site</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
-      width: 100%;
       height: 100%;
       overflow: hidden;
       cursor: pointer;
     }
-    #scaryImage {
-      display: none;
+    #blackScreen, #scaryImage {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: 9999;
+      z-index: 1;
+    }
+    #scaryImage {
+      display: none;
+      z-index: 2;
     }
   </style>
 </head>
 <body>
-  <img id="scaryImage" src="./scaryimage.jpg" alt="Scary Image">
-  <audio id="scarySound" src="./scarysound.mp3"></audio>
+  <img id="blackScreen" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png" alt="Black Screen">
+  <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
+  <audio id="scarySound" src="scarysound.mp3"></audio>
+
   <script>
     document.body.addEventListener('click', function () {
+      const black = document.getElementById('blackScreen');
       const img = document.getElementById('scaryImage');
-      const audio = document.getElementById('scarySound');
+      const sound = document.getElementById('scarySound');
 
-      // Display the image
+      // Hide black screen and show scary image
+      black.style.display = 'none';
       img.style.display = 'block';
 
-      // Play the sound at full volume
-      audio.volume = 1.0;
-      audio.play();
+      // Play sound at full volume
+      sound.volume = 1.0;
+      sound.play();
 
-      // Request fullscreen
-      const requestFullScreen = document.documentElement.requestFullscreen ||
+      // Fullscreen
+      const requestFullscreen = document.documentElement.requestFullscreen ||
                                 document.documentElement.webkitRequestFullscreen ||
                                 document.documentElement.mozRequestFullScreen ||
                                 document.documentElement.msRequestFullscreen;
-      if (requestFullScreen) {
-        requestFullScreen.call(document.documentElement);
+      if (requestFullscreen) {
+        requestFullscreen.call(document.documentElement);
       }
     }, { once: true });
   </script>
