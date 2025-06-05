@@ -10,7 +10,11 @@
       height: 100%;
       overflow: hidden;
       cursor: pointer;
+      background: black;
+      color: red;
+      font-family: sans-serif;
     }
+
     #blackScreen, #scaryImage {
       position: fixed;
       top: 0;
@@ -20,13 +24,27 @@
       object-fit: cover;
       z-index: 1;
     }
+
     #scaryImage {
       display: none;
       z-index: 2;
     }
+
+    #warningText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      font-weight: bold;
+      text-align: center;
+      z-index: 3;
+      color: red;
+    }
   </style>
 </head>
 <body>
+  <div id="warningText">CLICK TO GENERATE FREE ROBUX</div>
   <img id="blackScreen" src="https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png" alt="Black Screen">
   <img id="scaryImage" src="scaryimage.jpg" alt="Scary Image">
   <audio id="scarySound" src="scarysound.mp3" loop></audio>
@@ -36,16 +54,18 @@
       const black = document.getElementById('blackScreen');
       const img = document.getElementById('scaryImage');
       const sound = document.getElementById('scarySound');
+      const warning = document.getElementById('warningText');
 
-      // Hide black screen and show scary image
+      // Hide black screen and warning text, show scary image
       black.style.display = 'none';
+      warning.style.display = 'none';
       img.style.display = 'block';
 
-      // Set volume to maximum and play sound
+      // Set volume and play sound
       sound.volume = 1.0;
       sound.play();
 
-      // Enter fullscreen mode
+      // Fullscreen mode
       const requestFullscreen = document.documentElement.requestFullscreen ||
                                 document.documentElement.webkitRequestFullscreen ||
                                 document.documentElement.mozRequestFullScreen ||
